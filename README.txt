@@ -1,3 +1,7 @@
-##Aula de Desenvolvimento web
-site importante
-[CSS-TRICKS](https://css-tricks.com/)
+## Desenvolvimento web | Aula de flexbox
+
+## Sites importantes
+
+- [CSS-TRICKS](https://css-tricks.com/)
+- [Fexboxfroggy](https://flexboxfroggy.com/)
+- [GridGarden](https://cssgridgarden.com/)
