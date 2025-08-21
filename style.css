@@ -1,0 +1,17 @@
+.container{
+
+    width: 60%;
+    height: 60%;
+    background-color: gray;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.filha{
+
+    width: 70px;
+    height: 70px;
+    background-color: red;
+
+}
