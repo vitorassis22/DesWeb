@@ -1,0 +1,28 @@
+.container{
+    display: flex;
+    gap: 10;
+    flex-direction: column;
+}
+
+.cima{
+    width: 900px;
+    height: 250px;
+    background-color: antiquewhite;   
+}
+
+.cimadir{
+    background-color: aqua;
+    width: 300px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.laranja{
+    background-color: orange;
+    width: 300px;
+    height: 50px;
+}
