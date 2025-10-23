@@ -1,0 +1,13 @@
+.transitions {
+  width: 200px;
+  height: 200px;
+  background-color: green;
+  /*tempo de mudanca da transicao*/
+  transition: background-color 3s, width 0.3s, height 0.3s;
+}
+/*transicao ao passar o mouse em cima*/
+.transitions:hover {
+  background-color: red;
+  width: 250px;
+  height: 250px;
+}
