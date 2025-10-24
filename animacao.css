@@ -2,12 +2,53 @@
   width: 200px;
   height: 200px;
   background-color: green;
-  /*tempo de mudanca da transicao*/
-  transition: background-color 3s, width 0.3s, height 0.3s;
+  /*tempo de mudanca da transicao; ease-out: realiza uma transicao mais suave*/
+  /*transition: background-color 3s ease-out, width 0.6s ease-out, height 0.6s;*/
+  animation: quadradoVerde 2s linear infinite;
 }
+.aviao {
+  animation: aviao 2s linear infinite;
+}
+/*.transitions2 {
+  width: 200px;
+  height: 200px;
+  background-color: green;
+/*tempo de mudanca da transicao*/
+/*  transition: background-color 3s, width 0.6s, height 0.6s;
+}
+
 /*transicao ao passar o mouse em cima*/
-.transitions:hover {
+/*.transitions:hover {
   background-color: red;
   width: 250px;
   height: 250px;
+}
+/*.transitions2:hover {
+  background-color: red;
+  width: 250px;
+  height: 250px;
+}
+*/
+
+/*Animacoes*/
+/*@keyframes quadradoVerde {
+  10% {
+    margin-left: 10%;
+  }
+  30% {
+    margin-left: 50%;
+  }
+  70% {
+    margin-left: 70%;
+  }
+  95% {
+    margin-left: 120%;
+  }
+} */
+
+/* FAZER O AVIAO PARAR NO FINAL */
+@keyframes aviao {
+  to {
+    margin-left: 90%;
+  }
 }
