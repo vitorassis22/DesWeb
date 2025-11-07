@@ -1,0 +1,71 @@
+.container{
+    width: 1000px;
+    height: 550px;
+    background-color: gray;
+    display: flex;
+    flex-direction: column;
+}
+.cima{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-wrap: nowrap;
+    background-color: aquamarine;
+}
+
+.cimaesq{
+    width: 70%;
+    height: 100%;
+    background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cimadir{
+    width: 30%;
+    height: 100%;
+    background-color:blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+.branco{
+    width: 65%;
+    height: 35px;
+    background-color: white;
+}
+
+.verde1{
+    width: 100px;
+    height: 35px;
+    background-color: green;
+}
+.baixo{
+    width: 100%;
+    height: 450px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.verde2{
+    width: 200px;
+    height: 50px;
+    background-color: green;
+    margin-bottom: 35px;
+}
+.laranja{
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    margin-bottom: 10px;
+}
+.amarelo{
+    width: 200px;
+    height: 50px;
+    background-color: yellow;
+}
