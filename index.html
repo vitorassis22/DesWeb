@@ -3,372 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema da Borracharia </title>
-    <style>
-        /* --- CONFIGURAÇÕES GERAIS --- */
-        :root {
-            --primary-color: #f39c12; /* Laranja Pneu */
-            --dark-bg: #2c3e50;       /* Azul Petróleo Escuro */
-            --darker-bg: #1a252f;     /* Quase Preto */
-            --light-bg: #ecf0f1;
-            --text-color: #333;
-            /* Cores de Status */
-            --status-andamento: #f1c40f;
-            --status-feito: #3498db;
-            --status-pago: #2ecc71;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-
-        body { background-color: var(--light-bg); height: 100vh; display: flex; flex-direction: column; }
-        
-        /* Utilitários */
-        .hidden { display: none !important; }
-        .btn { padding: 12px 20px; border: none; cursor: pointer; border-radius: 4px; font-weight: bold; transition: 0.3s; }
-        .btn-primary { background-color: var(--primary-color); color: white; }
-        .btn-primary:hover { background-color: #e67e22; }
-        .btn-danger { background-color: #e74c3c; color: white; }
-        
-        input, select { 
-            padding: 15px; 
-            margin-bottom: 15px; 
-            width: 100%; 
-            border: 1px solid #ddd; 
-            border-radius: 4px; 
-            background-color: #f9f9f9;
-            font-size: 14px;
-        }
-        input:focus, select:focus { outline: 2px solid var(--primary-color); border-color: transparent; }
-
-        /* --- NOVO DESIGN DE LOGIN (TELA DIVIDIDA) --- */
-        #login-screen {
-            height: 100vh;
-            display: flex;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        .login-brand {
-            flex: 6; 
-            background: linear-gradient(135deg, var(--dark-bg), var(--darker-bg));
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-        }
-        
-        .tire-decoration {
-            width: 150px;
-            height: 150px;
-            border: 15px solid #333;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            background: #222;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        }
-        .tire-inner { width: 80px; height: 80px; border: 5px solid #555; border-radius: 50%; background: var(--primary-color); }
-
-        .login-brand h1 { font-size: 3rem; margin-bottom: 10px; }
-        .login-brand p { font-size: 1.2rem; opacity: 0.8; }
-
-        .login-form-container {
-            flex: 4; 
-            background: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 60px;
-            box-shadow: -10px 0 20px rgba(0,0,0,0.05);
-        }
-
-        .login-header { margin-bottom: 40px; }
-        .login-header h2 { font-size: 2rem; color: var(--dark-bg); margin-bottom: 10px; }
-        .login-header span { color: #7f8c8d; }
-
-        @media (max-width: 768px) {
-            #login-screen { flex-direction: column; }
-            .login-brand { flex: 1; padding: 20px; }
-            .tire-decoration { width: 80px; height: 80px; border-width: 8px; }
-            .tire-inner { width: 40px; height: 40px; }
-            .login-brand h1 { font-size: 1.5rem; }
-            .login-form-container { flex: 2; padding: 30px; }
-        }
-
-        /* --- DASHBOARD --- */
-        #dashboard-screen { display: flex; height: 100vh; }
-        .sidebar { width: 250px; background-color: var(--dark-bg); color: white; padding: 20px; display: flex; flex-direction: column; }
-        .sidebar h3 { margin-bottom: 30px; text-align: center; color: var(--primary-color); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
-        .sidebar button { background: none; border: none; color: white; padding: 15px; text-align: left; cursor: pointer; transition: 0.3s; width: 100%; border-radius: 4px; }
-        .sidebar button:hover { background-color: rgba(255,255,255,0.1); color: var(--primary-color); }
-        .main-content { flex: 1; padding: 40px; overflow-y: auto; background-color: #f4f6f7; }
-        .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border: 1px solid #eee; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; vertical-align: middle; }
-        th { background-color: var(--darker-bg); color: white; }
-        tr:hover { background-color: #f9f9f9; }
-
-        /* Estilos do Select de Status */
-        .status-select {
-            padding: 8px;
-            border-radius: 20px;
-            font-weight: bold;
-            color: white;
-            border: none;
-            cursor: pointer;
-            width: auto;
-            margin: 0;
-            text-align: center;
-            text-align-last: center;
-        }
-        .bg-andamento { background-color: var(--status-andamento); }
-        .bg-feito { background-color: var(--status-feito); }
-        .bg-pago { background-color: var(--status-pago); }
-
-    </style>
+    <title>Speed Borracharia</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
-    <section id="login-screen">
-        <div class="login-brand">
-            <div class="tire-decoration">
-                <div class="tire-inner"></div>
+    <nav>
+        <div class="logo">SPEED <span>BORRACHARIA</span></div>
+        <div class="menu-links" id="menu-container"></div>
+    </nav>
+
+    <section id="tela-home" class="screen active">
+        <div class="hero-content">
+            <h1>Seu carro em boas mãos</h1>
+            <p>Peças originais e serviços especializados.</p>
+            <div class="hero-btns">
+                <button class="btn-cta" onclick="navegar('tela-loja')">Ir para Loja</button>
+                <button class="btn-cta btn-outline" onclick="navegar('tela-servicos')">Solicitar Serviço</button>
             </div>
-            <h1>Borracharia Apaga Fácil</h1>
-            <p>Sistema de Gerenciamento</p>
-        </div>
-        <div class="login-form-container">
-            <div class="login-header">
-                <h2>Bem-vindo</h2>
-                <span>Acesse o painel administrativo.</span>
-            </div>
-            <label for="username" style="display:block; margin-bottom:5px; color:#666;">Usuário</label>
-            <input type="text" id="username" placeholder="Usuário (admin)">
-            <label for="password" style="display:block; margin-bottom:5px; color:#666;">Senha</label>
-            <input type="password" id="password" placeholder="Senha (1234)">
-            <button class="btn btn-primary" onclick="realizarLogin()" style="width: 100%; margin-top: 10px; padding: 15px;">ENTRAR</button>
-            <p id="error-msg" style="color: #e74c3c; font-size: 13px; margin-top: 15px; display: none; text-align: center;">Credenciais inválidas.</p>
         </div>
     </section>
 
-    <section id="dashboard-screen" class="hidden">
-        <nav class="sidebar">
-            <h3>BORRACHARIA</h3>
-            <button onclick="mostrarTela('tela-clientes')">👤 Clientes</button>
-            <button onclick="mostrarTela('tela-servicos')">🔧 Ocorrências</button>
-            <button onclick="mostrarTela('tela-estoque')">📦 Estoque</button>
-            <div style="flex: 1"></div>
-            <button onclick="logout()" style="color: #e74c3c; border: 1px solid #e74c3c; text-align: center;">Sair</button>
-        </nav>
+    <section id="tela-login" class="screen">
+        <div id="box-login" class="auth-box">
+            <h2>Acesse sua Conta</h2>
+            <p class="subtitle">Bem-vindo de volta!</p>
+            <form onsubmit="fazerLogin(event)">
+                <input type="text" id="login-user" placeholder="Usuário" required>
+                <input type="password" id="login-pass" placeholder="Senha" required>
+                <button type="submit" class="btn-full">Entrar</button>
+            </form>
+            <p class="switch-msg">Não tem conta? <span onclick="alternarFormulario('cadastro')">Cadastre-se aqui</span></p>
+        </div>
 
-        <main class="main-content">
-            <div id="tela-clientes" class="content-section">
-                <h2 style="margin-bottom: 20px;">Gerenciar Clientes</h2>
-                <div class="card">
-                    <form onsubmit="salvarCliente(event)" style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 10px;">
-                        <input type="text" id="cliente-nome" placeholder="Nome Completo" required style="margin:0">
-                        <input type="text" id="cliente-carro" placeholder="Veículo/Placa" required style="margin:0">
-                        <input type="tel" id="cliente-tel" placeholder="Telefone" required style="margin:0">
-                        <button type="submit" class="btn btn-primary">Adicionar</button>
-                    </form>
-                </div>
-                <div class="card" style="margin-top: 20px;">
-                    <table id="tabela-clientes">
-                        <thead><tr><th>Nome</th><th>Veículo</th><th>Telefone</th></tr></thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div id="tela-servicos" class="content-section hidden">
-                <h2 style="margin-bottom: 20px;">Ocorrências e Status</h2>
-                <div class="card">
-                    <form onsubmit="salvarServico(event)">
-                        <input type="text" id="servico-cliente" placeholder="Nome do Cliente" required>
-                        <select id="servico-tipo">
-                            <option value="Troca de Pneu">Troca de Pneu</option>
-                            <option value="Remendo">Remendo</option>
-                            <option value="Troca de Aro">Troca de Aro</option>
-                            <option value="Troca de Roda">Troca de Roda</option>
-                            <option value="Vulcanização">Vulcanização</option>
-                            <option value="Alinhamento">Alinhamento</option>
-                        </select>
-                        <input type="number" id="servico-valor" placeholder="Valor (R$)" required>
-                        <button type="submit" class="btn btn-primary" style="width: 100%">Abrir Ordem de Serviço</button>
-                    </form>
-                </div>
-                <div class="card" style="margin-top: 20px;">
-                    <h3>Histórico e Controle</h3>
-                    <table id="tabela-servicos">
-                        <thead>
-                            <tr>
-                                <th>Cliente</th>
-                                <th>Serviço</th>
-                                <th>Valor</th>
-                                <th>Status</th>
-                                <th>Data</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div id="tela-estoque" class="content-section hidden">
-                <h2 style="margin-bottom: 20px;">Controle de Estoque</h2>
-                <div class="card">
-                    <form onsubmit="salvarProduto(event)" style="display: grid; grid-template-columns: 2fr 1fr auto; gap: 10px;">
-                        <input type="text" id="prod-nome" placeholder="Nome do Produto" required style="margin:0">
-                        <input type="number" id="prod-qtd" placeholder="Qtd." required style="margin:0">
-                        <button type="submit" class="btn btn-primary">Entrada</button>
-                    </form>
-                </div>
-                <div class="card" style="margin-top: 20px;">
-                    <table id="tabela-estoque">
-                        <thead><tr><th>Produto</th><th>Qtd. Atual</th><th>Ação</th></tr></thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-        </main>
+        <div id="box-cadastro" class="auth-box hidden">
+            <h2>Criar Nova Conta</h2>
+            <p class="subtitle">Preencha seus dados abaixo</p>
+            <form onsubmit="fazerCadastro(event)">
+                <input type="text" id="cad-user" placeholder="Escolha um Usuário" required>
+                <input type="password" id="cad-pass" placeholder="Crie uma Senha" required>
+                <button type="submit" class="btn-full btn-green">Cadastrar</button>
+            </form>
+            <p class="switch-msg">Já tem conta? <span onclick="alternarFormulario('login')">Fazer Login</span></p>
+        </div>
     </section>
 
-    <script>
-        // --- LÓGICA DO SISTEMA ---
-        
-        let clientes = JSON.parse(localStorage.getItem('borracha_clientes')) || [];
-        let servicos = JSON.parse(localStorage.getItem('borracha_servicos')) || [];
-        let estoque = JSON.parse(localStorage.getItem('borracha_estoque')) || [];
+    <section id="tela-loja" class="screen">
+        <div class="header-section">
+            <h2>Peças e Acessórios</h2>
+        </div>
+        <div class="products-grid" id="container-produtos"></div>
+    </section>
 
-        document.addEventListener('DOMContentLoaded', () => {
-            atualizarTabelas();
-        });
+    <section id="tela-servicos" class="screen">
+        <div class="form-container">
+            <h2 id="titulo-servico">Solicitar Serviço</h2>
+            
+            <form onsubmit="processarServico(event)">
+                <input type="hidden" id="serv-id-edicao">
 
-        function realizarLogin() {
-            const user = document.getElementById('username').value;
-            const pass = document.getElementById('password').value;
+                <label>Tipo de Serviço</label>
+                <select id="serv-tipo">
+                    <option>Alinhamento</option>
+                    <option>Balanceamento</option>
+                    <option>Socorro / Guincho</option>
+                    <option>Trocar Calota</option>
+                    <option>Troca de Pneu</option>
+                    <option>Trocar Roda</option>
+                    <option>Remendo</option>
+                    
+                </select>
 
-            if(user === 'admin' && pass === '1234') {
-                document.getElementById('login-screen').classList.add('hidden');
-                document.getElementById('dashboard-screen').classList.remove('hidden');
-            } else {
-                const erro = document.getElementById('error-msg');
-                erro.style.display = 'block';
-                document.getElementById('password').style.borderColor = 'red';
-                setTimeout(() => document.getElementById('password').style.borderColor = '#ddd', 2000);
-            }
-        }
+                <label>Observações / Carro</label>
+                <textarea id="serv-obs" rows="3" placeholder="Ex: Fiat Toro, pneu traseiro furado..."></textarea>
+                
+                <div class="form-actions">
+                    <button type="submit" id="btn-salvar-servico" class="btn-full">Solicitar</button>
+                    <button type="button" id="btn-cancelar-edicao" class="btn-full btn-red hidden" onclick="cancelarEdicao()">Cancelar Alteração</button>
+                </div>
+            </form>
+        </div>
+    </section>
 
-        function logout() { location.reload(); }
+    <section id="tela-perfil" class="screen">
+        <div class="profile-header">
+            <h2 id="welcome-msg">Bem-vindo</h2>
+            <button onclick="logout()" class="btn-logout">Sair</button>
+        </div>
+        <div class="history-container">
+            <h3>Seu Histórico</h3>
+            <div class="table-wrapper">
+                <table id="tabela-historico">
+                    <thead>
+                        <tr>
+                            <th>Data Pedido</th>
+                            <th>Tipo</th>
+                            <th>Detalhe</th>
+                            <th>Status / Ações</th> </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
 
-        function mostrarTela(id) {
-            document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden'));
-            document.getElementById(id).classList.remove('hidden');
-        }
-
-        // --- CLIENTES ---
-        function salvarCliente(e) {
-            e.preventDefault();
-            clientes.push({
-                nome: document.getElementById('cliente-nome').value,
-                carro: document.getElementById('cliente-carro').value,
-                tel: document.getElementById('cliente-tel').value
-            });
-            localStorage.setItem('borracha_clientes', JSON.stringify(clientes));
-            e.target.reset();
-            atualizarTabelas();
-        }
-
-        // --- SERVIÇOS E STATUS ---
-        function salvarServico(e) {
-            e.preventDefault();
-            servicos.unshift({
-                cliente: document.getElementById('servico-cliente').value,
-                tipo: document.getElementById('servico-tipo').value,
-                valor: document.getElementById('servico-valor').value,
-                status: 'andamento', // Status inicial padrão
-                data: new Date().toLocaleDateString('pt-BR') + ' ' + new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})
-            });
-            localStorage.setItem('borracha_servicos', JSON.stringify(servicos));
-            e.target.reset();
-            atualizarTabelas();
-        }
-
-        function alterarStatusServico(index, novoStatus) {
-            servicos[index].status = novoStatus;
-            localStorage.setItem('borracha_servicos', JSON.stringify(servicos));
-            atualizarTabelas(); // Atualiza para mudar a cor do select
-        }
-
-        // --- ESTOQUE ---
-        function salvarProduto(e) {
-            e.preventDefault();
-            estoque.push({
-                nome: document.getElementById('prod-nome').value,
-                qtd: document.getElementById('prod-qtd').value
-            });
-            localStorage.setItem('borracha_estoque', JSON.stringify(estoque));
-            e.target.reset();
-            atualizarTabelas();
-        }
-
-        function removerEstoque(index) {
-            if(confirm('Tem certeza que deseja remover este item?')) {
-                estoque.splice(index, 1);
-                localStorage.setItem('borracha_estoque', JSON.stringify(estoque));
-                atualizarTabelas();
-            }
-        }
-
-        // --- RENDERIZAÇÃO ---
-        function atualizarTabelas() {
-            // Clientes
-            const tblClientes = document.querySelector('#tabela-clientes tbody');
-            tblClientes.innerHTML = clientes.map(c => `<tr><td>${c.nome}</td><td>${c.carro}</td><td>${c.tel}</td></tr>`).join('');
-
-            // Serviços com Dropdown de Status
-            const tblServicos = document.querySelector('#tabela-servicos tbody');
-            tblServicos.innerHTML = servicos.map((s, i) => {
-                // Define a classe de cor baseada no status
-                let bgClass = '';
-                if(s.status === 'andamento') bgClass = 'bg-andamento';
-                else if(s.status === 'feito') bgClass = 'bg-feito';
-                else if(s.status === 'pago') bgClass = 'bg-pago';
-                else {
-                    // Compatibilidade para dados antigos que não tenham status
-                    s.status = 'andamento';
-                    bgClass = 'bg-andamento';
-                }
-
-                return `
-                <tr>
-                    <td>${s.cliente}</td>
-                    <td>${s.tipo}</td>
-                    <td>R$ ${s.valor}</td>
-                    <td>
-                        <select onchange="alterarStatusServico(${i}, this.value)" class="status-select ${bgClass}">
-                            <option value="andamento" ${s.status === 'andamento' ? 'selected' : ''}>Em Andamento</option>
-                            <option value="feito" ${s.status === 'feito' ? 'selected' : ''}>Feito</option>
-                            <option value="pago" ${s.status === 'pago' ? 'selected' : ''}>Pago</option>
-                        </select>
-                    </td>
-                    <td style="font-size: 0.9em; color: #777;">${s.data}</td>
-                </tr>`;
-            }).join('');
-
-            // Estoque
-            const tblEstoque = document.querySelector('#tabela-estoque tbody');
-            tblEstoque.innerHTML = estoque.map((p, i) => `
-                <tr>
-                    <td>${p.nome}</td>
-                    <td><span style="background:${p.qtd < 5 ? '#e74c3c' : '#2ecc71'}; color:white; padding: 2px 8px; border-radius:10px; font-size:12px">${p.qtd} un</span></td>
-                    <td><button onclick="removerEstoque(${i})" class="btn-danger" style="border:none; padding:5px 10px; border-radius:4px; cursor:pointer">Excluir</button></td>
-                </tr>`).join('');
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
