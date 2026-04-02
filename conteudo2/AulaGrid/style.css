@@ -1,0 +1,76 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.filho1{
+    width: 150px;
+    height: 150px;
+    background-color: red;
+}
+
+.filho5{
+    width: 150px;
+    height: 150px;
+    background-color: red;
+}
+
+.filho2{
+    width: 100px;
+    height: 50px;
+    background-color: yellow;
+}
+
+.filho3{
+    width: 100px;
+    height: 50px;
+    background-color: yellow;
+}
+
+.filho4{
+    width: 100px;
+    height: 50px;
+    background-color: yellow;
+}
+
+/*muda o objeto ou conjunto selecionados de acordo com o tamanho*/
+@media (max-width:700px){
+    
+    .container{
+        align-items: flex-start;
+        height: 450px;
+        flex-wrap: wrap;
+        
+    }
+    .filho1{
+        width: 700px;
+        height: 100px;
+    }
+    .filho2{
+        width: 45%;
+        height: 100px;
+    }
+    .filho3{
+        width: 30%;
+        height: 100px;
+    }
+    .filho4{
+        width: 20%;
+        height: 100px;
+    }
+
+    .div2{
+        display: flex;
+        height: 200px;
+        width: 100%;
+        align-items: flex-end;
+
+    }
+/*Tem que separar o ultimo quadrado vermelho do resto*/
+    .filho5{
+        width: 60%;
+        height: 100px;
+    }
+}
+
